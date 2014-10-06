@@ -1,0 +1,26 @@
+{
+  "name": "obtotype",
+  "version": "0.0.1",
+  "description": "Experimenting with better use of prototypes",
+  "main": "src/obtotype.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adrianmay/obtotype.git"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": "Adrian May",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adrianmay/obtotype/issues"
+  },
+  "homepage": "http://adrianmay.github.io/obtotype",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^2.1.4",
+    "grunt-contrib-uglify": "^0.5.1"
+  },
+  "dependencies": {}
+}
+
