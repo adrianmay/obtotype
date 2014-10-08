@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<html>
+  <head>
+    <script src='../src/subobtotype.js'> </script>
+    <script src='undo.js'> 
+    </script>
+    <script id='meat'>
+function meat(log) {
+  var u = {};
+  u = u.edit(  ["a"       ],  1                ,log);  
+  u = u.edit(  ["a"       ],  2                ,log);
+  u = u.edit(  ["b"       ],  { b1: 1, b2: 2}  ,log);
+  u = u.edit(  ["b", "b1" ],  10               ,log);
+  u = u.undo(                                   log);
+  u = u.undo(                                   log);
+  u = u.undo(                                   log);
+  u = u.undo(                                   log);
+}
+    </script>
+    <script>
+
+function showSource() {
+  document.getElementById('source').innerHTML = document.getElementById('meat').innerHTML;
+}
+
+function go() {
+  showSource();
+  var log = [];
+  meat(log);
+  var res = log.join("\n");
+  document.getElementById('show').innerHTML = res;
+
+}
+    </script>
+  </head>
+  <body onLoad='go();showSource();'>
+    <h1>Linear undo buffer using simple clone and project.</h1>
+    <h3>No need for delegee to know delegators</h3>
+    <h3>Source:</h3>
+    <pre id='source'> </pre>
+    <h3>Result::</h3>
+    <pre id='show'> </pre>
+  </body>
+</html>
+

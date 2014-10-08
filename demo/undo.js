@@ -16,24 +16,13 @@ Object.prototype.edit = function (p, v, log) {
     else
       target[s]=v;
   }
-  if (log) console.log(JSON.stringify(flatten(ob)));
+  if (log!==undefined) log.push(JSON.stringify(flatten(ob)));
   return ob;
 }
 
 Object.prototype.undo = function (log) {
   var ob = Object.getPrototypeOf(this);
-  if (log) console.log(JSON.stringify(flatten(ob)));
+  if (log!==undefined) log.push(JSON.stringify(flatten(ob)));
   return ob
 }
 
-var u = { }
-
-
-u = u.edit(["a"],1);  
-u = u.edit(["a"],2);
-u = u.edit(["b"], { b1: 1, b2: 2});
-u = u.edit(["b","b1"], 10);
-u = u.undo();
-u = u.undo();
-u = u.undo();
-u = u.undo();
