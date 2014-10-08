@@ -15,43 +15,43 @@ function meat(log) {
     __bo: { boi: 10}
   }
 
-  var d1 = base.project();
+  var deri = base.project();
 
-  log.push("Basic types get projectee updates until overriden in projection:");
-  log.push("    base.bi:"+base.bi+";  d1.bi:"+d1.bi);
+  log.push("Basic types get projector's updates until overriden in projection:");
+  log.push("    base.bi:"+base.bi+";  deri.bi:"+deri.bi);
   log.push("  Change base.bi...");  base.bi=2;  
-  log.push("    base.bi:"+base.bi+";  d1.bi:"+d1.bi);
-  log.push("  Change di.bi...");      d1.bi=3;  
-  log.push("    base.bi:"+base.bi+";  d1.bi:"+d1.bi);
+  log.push("    base.bi:"+base.bi+";  deri.bi:"+deri.bi);
+  log.push("  Change di.bi...");    deri.bi=3;  
+  log.push("    base.bi:"+base.bi+";  deri.bi:"+deri.bi);
   log.push("  Change base.bi...");  base.bi=4;  
-  log.push("    base.bi:"+base.bi+";  d1.bi:"+d1.bi);
+  log.push("    base.bi:"+base.bi+";  deri.bi:"+deri.bi);
 
-  log.push("\nObject-value properties with ordinary names behave the same:");
-  log.push("    base.bo.boi:"+base.bo.boi+";  d1.bo.boi:"+d1.bo.boi);
+  log.push("\nObject-valued properties with ordinary names behave the same:");
+  log.push("    base.bo.boi:"+base.bo.boi+";  deri.bo.boi:"+deri.bo.boi);
   log.push("  Change base.bo.boi...");  base.bo.boi=20;  
-  log.push("    base.bo.boi:"+base.bo.boi+";  d1.bo.boi:"+d1.bo.boi);
-  log.push("  Change di.bo.boi...");      d1.bo.boi=30;  
-  log.push("    base.bo.boi:"+base.bo.boi+";  d1.bo.boi:"+d1.bo.boi);
+  log.push("    base.bo.boi:"+base.bo.boi+";  deri.bo.boi:"+deri.bo.boi);
+  log.push("  Change di.bo.boi...");    deri.bo.boi=30;  
+  log.push("    base.bo.boi:"+base.bo.boi+";  deri.bo.boi:"+deri.bo.boi);
   log.push("  Change base.bo.boi...");  base.bo.boi=40;  
-  log.push("    base.bo.boi:"+base.bo.boi+";  d1.bo.boi:"+d1.bo.boi);
+  log.push("    base.bo.boi:"+base.bo.boi+";  deri.bo.boi:"+deri.bo.boi);
 
   log.push("\nBut with names starting with $$ we get a shallow copy:");
-  log.push("    base.$$bo.boi:"+base.$$bo.boi+";  d1.$$bo.boi:"+d1.$$bo.boi);
+  log.push("    base.$$bo.boi:"+base.$$bo.boi+";  deri.$$bo.boi:"+deri.$$bo.boi);
   log.push("  Change base.$$bo.boi...");  base.$$bo.boi=20;  
-  log.push("    base.$$bo.boi:"+base.$$bo.boi+";  d1.$$bo.boi:"+d1.$$bo.boi);
-  log.push("  Change di.$$bo.boi...");      d1.$$bo.boi=30;  
-  log.push("    base.$$bo.boi:"+base.$$bo.boi+";  d1.$$bo.boi:"+d1.$$bo.boi);
+  log.push("    base.$$bo.boi:"+base.$$bo.boi+";  deri.$$bo.boi:"+deri.$$bo.boi);
+  log.push("  Change di.$$bo.boi...");    deri.$$bo.boi=30;  
+  log.push("    base.$$bo.boi:"+base.$$bo.boi+";  deri.$$bo.boi:"+deri.$$bo.boi);
   log.push("  Change base.$$bo.boi...");  base.$$bo.boi=40;  
-  log.push("    base.$$bo.boi:"+base.$$bo.boi+";  d1.$$bo.boi:"+d1.$$bo.boi);
+  log.push("    base.$$bo.boi:"+base.$$bo.boi+";  deri.$$bo.boi:"+deri.$$bo.boi);
 
   log.push("\nAnd with names starting with __ we get a deep copy:");
-  log.push("    base.__bo.boi:"+base.__bo.boi+";  d1.__bo.boi:"+d1.__bo.boi);
+  log.push("    base.__bo.boi:"+base.__bo.boi+";  deri.__bo.boi:"+deri.__bo.boi);
   log.push("  Change base.__bo.boi...");  base.__bo.boi=20;  
-  log.push("    base.__bo.boi:"+base.__bo.boi+";  d1.__bo.boi:"+d1.__bo.boi);
-  log.push("  Change di.__bo.boi...");      d1.__bo.boi=30;  
-  log.push("    base.__bo.boi:"+base.__bo.boi+";  d1.__bo.boi:"+d1.__bo.boi);
+  log.push("    base.__bo.boi:"+base.__bo.boi+";  deri.__bo.boi:"+deri.__bo.boi);
+  log.push("  Change di.__bo.boi...");    deri.__bo.boi=30;  
+  log.push("    base.__bo.boi:"+base.__bo.boi+";  deri.__bo.boi:"+deri.__bo.boi);
   log.push("  Change base.__bo.boi...");  base.__bo.boi=40;  
-  log.push("    base.__bo.boi:"+base.__bo.boi+";  d1.__bo.boi:"+d1.__bo.boi);
+  log.push("    base.__bo.boi:"+base.__bo.boi+";  deri.__bo.boi:"+deri.__bo.boi);
 
 }
     </script>
