@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<html>
+  <head>
+    <script src='misc.js'></script> 
+    <script id='core' src='../src/subobtotype.js'> </script>
+    </script>
+    <script id='meat'> 
+
+function meat(log) {
+  var home = Object.create( { path: function() { return "";} , name:"home"});
+  home.path = function(s) { return this.proto().path() + "/" + this.name; };
+
+  function subdir(parent, name) { var ret = parent.project(); ret.name=name; return ret; }
+
+  var alex = subdir(home, "alex");
+  var bob = subdir(home, "bob");
+  var docs = subdir(alex, "docs");
+  var music = subdir(alex, "music");
+  
+  log.push(home.path());
+  log.push(bob.path());
+  log.push(alex.path());
+  log.push(docs.path());
+  log.push(music.path());
+  
+  alex.name="alice";
+  log.push("");
+
+  log.push(home.path());
+  log.push(bob.path());
+  log.push(alex.path());
+  log.push(docs.path());
+  log.push(music.path());
+} 
+    </script>
+    <script src='frame.js'> </script>
+  </head>
+  <body onLoad='go();'>
+    <h1>3: More containment</h1>
+    <p>Same idea</p>
+    <div id='here'></pre>
+    <div id='next' style='display:none;' src='0_sub.html'></div>
+  </body>
+</html>
+

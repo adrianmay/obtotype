@@ -1,3 +1,4 @@
+//Very simple version without many goodies.
 
 Object.prototype.clone = function() {
   var res = Object.create(Object.getPrototypeOf(this));
