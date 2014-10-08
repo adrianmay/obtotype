@@ -14,7 +14,11 @@ function meat(log) {
     u = u.edit(  ["a"       ],  2                ,log);
     u = u.edit(  ["b"       ],  { b1: 1, b2: 2}  ,log);
     u = u.edit(  ["b", "b1" ],  10               ,log);
+    delete u.z;
+    log.push("After delete z:"+JSON.stringify(flatten(u)));
     u = u.undo(                                   log);
+    u.z = undefined;
+    log.push("After set z undef:"+JSON.stringify(flatten(u)));
     u = u.undo(                                   log);
     u = u.undo(                                   log);
     u = u.undo(                                   log);

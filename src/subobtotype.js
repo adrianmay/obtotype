@@ -25,6 +25,7 @@ Object.prototype.project = function() {
   return res;
 }
 
+Object.prototype.proto = function() { return Object.getPrototypeOf(this); }
 
 
 

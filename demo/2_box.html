@@ -4,19 +4,42 @@
   <head>
     <script src='misc.js'></script> 
     <script id='core' src='../src/subobtotype.js'> </script>
-    <script id='extra' src='2_box.js'> 
     </script>
     <script id='meat'> 
 
 function meat(log) {
-  log.push("Foo");
+  var outer = {}
+  outer.size = function() { return 100; }
+
+  var middle = outer.project();
+  middle.diff = function(s) { return s-10; }
+  middle.size = function() { return this.diff(this.proto().size()); }
+
+  var inner = middle.project();
+  inner.diff = function(s) { return s/2; }
+
+  var micro = inner.project();
+  micro.diff = function(s) { return s/10; }
+  
+  log.push("Outer:  " +  outer.size());
+  log.push("Middle: " + middle.size());
+  log.push("Inner:  " +  inner.size());
+  log.push("Micro:  " +  micro.size());
+
+  outer.size = function() { return 1000; }
+  log.push("");
+
+  log.push("Outer:  " +  outer.size());
+  log.push("Middle: " + middle.size());
+  log.push("Inner:  " +  inner.size());
+  log.push("Micro:  " +  micro.size());
 } 
     </script>
     <script src='frame.js'> </script>
   </head>
   <body onLoad='go();'>
     <h1>2: Use projection for containment</h1>
-    <p></p>
+    <p>This can be extended to rectangles or any other property</p>
     <div id='here'></pre>
     <div id='next' style='display:none;' src='0_sub.html'></div>
   </body>
