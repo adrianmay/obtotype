@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<html>
+  <head>
+    <script src='misc.js'></script> 
+    <script id='core' src='../src/subobtotype.js'> </script>
+    <script id='meat'>
+
+function meat(log) {
+
+  var base = {
+    bi:   1, 
+    bo:   { boi: 10, 
+            bof: function () {return 100;} },
+    $$bo: { boi: 10, 
+            bof: function () {return 100;} }
+  }
+
+  var d1 = base.project();
+
+  log.push("Basic types get projectee updates until overriden in projection:");
+  log.push("  base.bi:"+base.bi+";  d1.bi:"+d1.bi);
+  log.push("Change base.bi...");
+  base.bi=2;
+  log.push("  base.bi:"+base.bi+";  d1.bi:"+d1.bi);
+  log.push("Change di.bi...");
+  d1.bi=3;
+  log.push("  base.bi:"+base.bi+";  d1.bi:"+d1.bi);
+  log.push("Change base.bi...");
+  base.bi=4;
+  log.push("  base.bi:"+base.bi+";  d1.bi:"+d1.bi);
+
+  d1.bo.boi=20;
+  d1.bo.bof=function () {return 200};
+
+  d1.$$bo.boi=30;
+  d1.$$bo.bof=function () {return 300};
+
+  log.push("\nProjectee is immune to changes in projection...");
+  log.push("  base.bo.boi:"+base.bo.boi+";  base.bo.bof:"+base.bo.bof);
+  log.push("    d1.bo.boi:"+d1.bo.boi+";    d1.bo.bof:"+d1.bo.bof);
+
+  log.push("\n...unless $$ appended to property name:");
+  log.push("  base.$$bo.boi:"+base.$$bo.boi+";  base.$$bo.bof:"+base.$$bo.bof);
+  log.push("    d1.$$bo.boi:"+d1.$$bo.boi+";    d1.$$bo.bof:"+d1.$$bo.bof);
+
+  var d2 = d1.project();
+}
+    </script>
+
+    <script src='frame.js'> </script>
+  </head>
+  <body onLoad='go();'>
+    <h1>Demonstrate basics of subobtotype model</h1>
+    <p>Most objects are deep copied into the projection, but not those beginning with $$</p>
+    <div id='here'></div>
+  </body>
+</html>
+

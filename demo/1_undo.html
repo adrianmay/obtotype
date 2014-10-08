@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<html>
+  <head>
+    <script src='misc.js'></script> 
+    <script id='core' src='../src/subobtotype.js'> </script>
+    <script id='extra' src='1_undo.js'> 
+    </script>
+    <script id='meat'> 
+function meat(log) {
+    var u = {z:"hi"};
+    u = u.edit(  ["a"       ],  1                ,log);  
+    u = u.edit(  ["a"       ],  2                ,log);
+    u = u.edit(  ["b"       ],  { b1: 1, b2: 2}  ,log);
+    u = u.edit(  ["b", "b1" ],  10               ,log);
+    u = u.undo(                                   log);
+    u = u.undo(                                   log);
+    u = u.undo(                                   log);
+    u = u.undo(                                   log);
+} 
+    </script>
+    <script src='frame.js'> </script>
+  </head>
+  <body onLoad='go();'>
+    <h1>Linear undo buffer using simple projection.</h1>
+    <p>No need for delegee to know delegators</p>
+    <div id='here'></pre>
+  </body>
+</html>
+

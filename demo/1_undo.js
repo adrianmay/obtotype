@@ -1,12 +1,4 @@
 
-function flatten(obj) {
-    var result = Object.create(obj);
-    for(var key in result) {
-        result[key] = result[key];
-    }
-    return result;
-}
-
 Object.prototype.edit = function (p, v, log) { 
   var ob = this.project();
   var target, s; 
@@ -14,7 +6,7 @@ Object.prototype.edit = function (p, v, log) {
     if (p.length)
       target = target[s];
     else
-      target[s]=v;
+      target[s] = (typeof v === 'object') ? v.project() : v;
   }
   if (log!==undefined) log.push(JSON.stringify(flatten(ob)));
   return ob;
