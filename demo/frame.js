@@ -6,7 +6,7 @@ function go() {
   var log = [];
   meat(log);
   var right = log.join("\n") + "\n\n\n";
-  var left = document.getElementById('meat').innerHTML;
+  var left = "";
   
   function makeLink(title, url) { return "<a href='"+url+"'>"+title+"</a>"; }
   function maybeAddLinkToId(title, id) {
@@ -15,5 +15,6 @@ function go() {
   }
   left += maybeAddLinkToId("Underlying library", 'core'); 
   left += maybeAddLinkToId("Overlying library", 'extra'); 
+  left += document.getElementById('meat').innerHTML;
   here.innerHTML = tabulate( left, right );
 }

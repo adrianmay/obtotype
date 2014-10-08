@@ -10,49 +10,57 @@ function meat(log) {
 
   var base = {
     bi:   1, 
-    bo:   { boi: 10, 
-            bof: function () {return 100;} },
-    $$bo: { boi: 10, 
-            bof: function () {return 100;} }
+    bo:   { boi: 10},
+    $$bo: { boi: 10},
+    __bo: { boi: 10}
   }
 
   var d1 = base.project();
 
   log.push("Basic types get projectee updates until overriden in projection:");
-  log.push("  base.bi:"+base.bi+";  d1.bi:"+d1.bi);
-  log.push("Change base.bi...");
-  base.bi=2;
-  log.push("  base.bi:"+base.bi+";  d1.bi:"+d1.bi);
-  log.push("Change di.bi...");
-  d1.bi=3;
-  log.push("  base.bi:"+base.bi+";  d1.bi:"+d1.bi);
-  log.push("Change base.bi...");
-  base.bi=4;
-  log.push("  base.bi:"+base.bi+";  d1.bi:"+d1.bi);
+  log.push("    base.bi:"+base.bi+";  d1.bi:"+d1.bi);
+  log.push("  Change base.bi...");  base.bi=2;  
+  log.push("    base.bi:"+base.bi+";  d1.bi:"+d1.bi);
+  log.push("  Change di.bi...");      d1.bi=3;  
+  log.push("    base.bi:"+base.bi+";  d1.bi:"+d1.bi);
+  log.push("  Change base.bi...");  base.bi=4;  
+  log.push("    base.bi:"+base.bi+";  d1.bi:"+d1.bi);
 
-  d1.bo.boi=20;
-  d1.bo.bof=function () {return 200};
+  log.push("\nObject-value properties with ordinary names behave the same:");
+  log.push("    base.bo.boi:"+base.bo.boi+";  d1.bo.boi:"+d1.bo.boi);
+  log.push("  Change base.bo.boi...");  base.bo.boi=20;  
+  log.push("    base.bo.boi:"+base.bo.boi+";  d1.bo.boi:"+d1.bo.boi);
+  log.push("  Change di.bo.boi...");      d1.bo.boi=30;  
+  log.push("    base.bo.boi:"+base.bo.boi+";  d1.bo.boi:"+d1.bo.boi);
+  log.push("  Change base.bo.boi...");  base.bo.boi=40;  
+  log.push("    base.bo.boi:"+base.bo.boi+";  d1.bo.boi:"+d1.bo.boi);
 
-  d1.$$bo.boi=30;
-  d1.$$bo.bof=function () {return 300};
+  log.push("\nBut with names starting with $$ we get a shallow copy:");
+  log.push("    base.$$bo.boi:"+base.$$bo.boi+";  d1.$$bo.boi:"+d1.$$bo.boi);
+  log.push("  Change base.$$bo.boi...");  base.$$bo.boi=20;  
+  log.push("    base.$$bo.boi:"+base.$$bo.boi+";  d1.$$bo.boi:"+d1.$$bo.boi);
+  log.push("  Change di.$$bo.boi...");      d1.$$bo.boi=30;  
+  log.push("    base.$$bo.boi:"+base.$$bo.boi+";  d1.$$bo.boi:"+d1.$$bo.boi);
+  log.push("  Change base.$$bo.boi...");  base.$$bo.boi=40;  
+  log.push("    base.$$bo.boi:"+base.$$bo.boi+";  d1.$$bo.boi:"+d1.$$bo.boi);
 
-  log.push("\nProjectee is immune to changes in projection...");
-  log.push("  base.bo.boi:"+base.bo.boi+";  base.bo.bof:"+base.bo.bof);
-  log.push("    d1.bo.boi:"+d1.bo.boi+";    d1.bo.bof:"+d1.bo.bof);
+  log.push("\nAnd with names starting with __ we get a deep copy:");
+  log.push("    base.__bo.boi:"+base.__bo.boi+";  d1.__bo.boi:"+d1.__bo.boi);
+  log.push("  Change base.__bo.boi...");  base.__bo.boi=20;  
+  log.push("    base.__bo.boi:"+base.__bo.boi+";  d1.__bo.boi:"+d1.__bo.boi);
+  log.push("  Change di.__bo.boi...");      d1.__bo.boi=30;  
+  log.push("    base.__bo.boi:"+base.__bo.boi+";  d1.__bo.boi:"+d1.__bo.boi);
+  log.push("  Change base.__bo.boi...");  base.__bo.boi=40;  
+  log.push("    base.__bo.boi:"+base.__bo.boi+";  d1.__bo.boi:"+d1.__bo.boi);
 
-  log.push("\n...unless $$ appended to property name:");
-  log.push("  base.$$bo.boi:"+base.$$bo.boi+";  base.$$bo.bof:"+base.$$bo.bof);
-  log.push("    d1.$$bo.boi:"+d1.$$bo.boi+";    d1.$$bo.bof:"+d1.$$bo.bof);
-
-  var d2 = d1.project();
 }
     </script>
 
     <script src='frame.js'> </script>
   </head>
   <body onLoad='go();'>
-    <h1>Demonstrate basics of subobtotype model</h1>
-    <p>Most objects are deep copied into the projection, but not those beginning with $$</p>
+    <h1>Demonstrate basics of subobtotype projection</h1>
+    <p>There are three ways to project an object-valued property</p>
     <div id='here'></div>
   </body>
 </html>
