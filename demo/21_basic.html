@@ -11,7 +11,9 @@ function meat(log) {
 
   var base = {
     bi:   1, 
-    bo:   { boi: 10}
+    bo:   { boi: 10},
+    $$bo: { boi: 10},
+    __bo: { boi: 10}
   }
 
   var deri = base.project();
@@ -25,7 +27,7 @@ function meat(log) {
   log.push("  Change base.bi...");  base.bi=4;  
   log.push("    base.bi:"+base.bi+";  deri.bi:"+deri.bi);
 
-  log.push("\nObject-valued properties behave the same:");
+  log.push("\nObject-valued properties with ordinary names behave the same:");
   log.push("    base.bo.boi:"+base.bo.boi+";  deri.bo.boi:"+deri.bo.boi);
   log.push("  Change base.bo.boi...");  base.bo.boi=20;  
   log.push("    base.bo.boi:"+base.bo.boi+";  deri.bo.boi:"+deri.bo.boi);
@@ -34,15 +36,33 @@ function meat(log) {
   log.push("  Change base.bo.boi...");  base.bo.boi=40;  
   log.push("    base.bo.boi:"+base.bo.boi+";  deri.bo.boi:"+deri.bo.boi);
 
+  log.push("\nBut with names starting with $$ we get a shallow copy:");
+  log.push("    base.$$bo.boi:"+base.$$bo.boi+";  deri.$$bo.boi:"+deri.$$bo.boi);
+  log.push("  Change base.$$bo.boi...");  base.$$bo.boi=20;  
+  log.push("    base.$$bo.boi:"+base.$$bo.boi+";  deri.$$bo.boi:"+deri.$$bo.boi);
+  log.push("  Change di.$$bo.boi...");    deri.$$bo.boi=30;  
+  log.push("    base.$$bo.boi:"+base.$$bo.boi+";  deri.$$bo.boi:"+deri.$$bo.boi);
+  log.push("  Change base.$$bo.boi...");  base.$$bo.boi=40;  
+  log.push("    base.$$bo.boi:"+base.$$bo.boi+";  deri.$$bo.boi:"+deri.$$bo.boi);
+
+  log.push("\nAnd with names starting with __ we get a deep copy:");
+  log.push("    base.__bo.boi:"+base.__bo.boi+";  deri.__bo.boi:"+deri.__bo.boi);
+  log.push("  Change base.__bo.boi...");  base.__bo.boi=20;  
+  log.push("    base.__bo.boi:"+base.__bo.boi+";  deri.__bo.boi:"+deri.__bo.boi);
+  log.push("  Change di.__bo.boi...");    deri.__bo.boi=30;  
+  log.push("    base.__bo.boi:"+base.__bo.boi+";  deri.__bo.boi:"+deri.__bo.boi);
+  log.push("  Change base.__bo.boi...");  base.__bo.boi=40;  
+  log.push("    base.__bo.boi:"+base.__bo.boi+";  deri.__bo.boi:"+deri.__bo.boi);
+
 }
     </script>
 
     <script src='frame.js'> </script>
   </head>
   <body onLoad='go();'>
-    <h1>1.1: Demonstrate basics of obtotype_simplest projection</h1>
-    <p>Javascript is <b>not</b> a prototype-based language, but we can fix that.</p>
+    <h1>2.1: Demonstrate basics of obtotype_cloning projection</h1>
     <p></p>
+    <p>There are three ways to project an object-valued property...</p>
     <div id='here'></div>
     <div id='next' style='display:none;' src='12_undo.html'></div>
   </body>
