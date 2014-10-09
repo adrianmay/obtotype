@@ -3,16 +3,20 @@
 <html>
   <head>
     <script src='misc.js'></script> 
-    <script id='core' src='../src/subobtotype.js'> </script>
+    <script id='core' src='../src/obtotype_simplest.js'> </script>
     </script>
     <script id='meat'> 
 
 function meat(log) {
-  var home = Object.create( { path: function() { return "";} , name:"home"});
-  home.path = function(s) { return this.proto().path() + "/" + this.name; };
 
-  function subdir(parent, name) { var ret = parent.project(); ret.name=name; return ret; }
+  function subdir(parent, name) { 
+    var ret = parent.project(); 
+    ret.name=name; 
+    return ret; 
+  }
 
+  var home = subdir( { path: function() { return "";} }, "home");
+  home.path = function() { return this.proto().path() + "/" + this.name; };
   var alex = subdir(home, "alex");
   var bob = subdir(home, "bob");
   var docs = subdir(alex, "docs");
@@ -40,7 +44,7 @@ function meat(log) {
     <h1>3: More containment</h1>
     <p>Same idea</p>
     <div id='here'></pre>
-    <div id='next' style='display:none;' src='0_sub.html'></div>
+    <div id='next' style='display:none;' src='11_basic.html'></div>
   </body>
 </html>
 
