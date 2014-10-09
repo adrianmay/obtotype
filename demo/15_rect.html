@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<html>
+  <head>
+    <script src='misc.js'></script> 
+    <script src='navs.js'></script> 
+    <script id='extra' src='15_rect.js'> </script>
+    <script id='core' src='../src/obtotype_simplest.js'> </script>
+    </script>
+    <script id='meat'> 
+
+var page, childpane, rightpane, leftpane;
+
+function meat(log) {
+
+  log.push("Let me reserve some space here "+
+  ".......... .......... .......... ..........");
+
+  page = {
+    divId: 'page',
+    world: [10,10,50,50], //left, top, width, height
+    where: function() { return this.world;}, 
+    moveDiv: function () {
+      var w = this.where();
+      var s = "left:"+w[0]+"px;top:"+w[1]+"px;width:"+w[2]+"px;height:"+w[3]+"px;";
+      document.getElementById(this.divId).setAttribute('style', s);
+    }
+  };
+
+  //Positions are relative to parent
+
+  childpane = page.project();
+  childpane.whereto = function(p) { return p;}
+  childpane.where = function () { return this.whereto(this.proto().where());}
+  childpane.standoff = 10;
+
+  leftpane = childpane.project();
+  leftpane.divId = 'leftpane';
+  leftpane.whereto = function(p) { 
+    var ret = [];
+    ret[0] = this.standoff;   
+    ret[1] = this.standoff;
+    ret[3] = p[3] - 2*this.standoff; if (ret[3]<0) ret[3]=0;
+    ret[2] = p[2] - 2*this.standoff; if (ret[2]<0) ret[2]=0;
+    //Not so easy in CSS:
+    var maxwidth=200, hungrywidth=100;
+    if (ret[2] > hungrywidth) ret[2] = hungrywidth + (ret[2]-hungrywidth)/2;
+    if (ret[2] > maxwidth) ret[2]=maxwidth;
+    return ret;
+  }
+
+  rightpane = childpane.project();
+  rightpane.divId = 'rightpane';
+  rightpane.whereto = function(p) { 
+    var l = leftpane.where();
+    //The rest of the parent not taken by leftpane with a reasonable standoff all round
+    return [l[0]+l[2]+this.standoff, l[1], p[2]-l[2]-3*this.standoff, l[3]]
+  }
+
+  var step=10, period=50, hix=500, hiy=100, lo=20;
+  var dir='d';
+  var fs = { 
+    u: function () { page.world[3]-=step; if (page.world[3] <= lo) dir = 'r'; },
+    r: function () { page.world[2]+=step; if (page.world[2] >= hix) dir = 'd'; },
+    d: function () { page.world[3]+=step; if (page.world[3] >= hiy) dir = 'l'; },
+    l: function () { page.world[2]-=step; if (page.world[2] <= lo) dir = 'u'; }
+  };
+  function animate() {
+    fs[dir]();
+    page.moveDiv();
+    leftpane.moveDiv();
+    rightpane.moveDiv();
+  }
+
+  setTimeout(function () {
+    var stage = document.getElementById('results');
+    stage.innerHTML += magic;
+    setInterval(animate, period);
+  }, 500);
+
+} 
+
+    </script>
+    <script src='frame.js'> </script>
+    <style>
+      div.stage { position:relative;border:1px solid #000;}
+      div.actor { position:absolute;border:1px solid #000;}
+
+    </style>
+  </head>
+  <body onLoad='go();'>
+    <h1>1.5: Nested rectangles</h1>
+    <p>This can be extended to rectangles or any other property</p>
+    <div id='here'></div>
+    <div id='next' style='display:none;' src='14_dir.html'></div>
+  </body>
+</html>
+

@@ -7,7 +7,7 @@ function go() {
       "</table>"+
       "<table border='1' width='100%'>"+
       "<tr><th>Source<th>Result"+
-      "<tr style='vertical-align:top;'><td><pre>"+l+"</pre><td><pre>"+r+"</pre>"+
+      "<tr style='vertical-align:top;'><td><pre>"+l+"</pre><td id='results'><pre>"+r+"</pre>"+
       "</table>"
   }
   function makeLink(title, url) { return "<a href='"+url+"'>"+title+"</a>"; }
