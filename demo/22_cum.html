@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<html>
+  <head>
+    <script src='misc.js'></script> 
+    <script src='navs.js'></script> 
+    <script id='extra' src='22_cum.js'> </script>
+    <script id='core' src='../src/obtotype_simplest.js'> </script>
+    <script id='meat'>
+
+function meat(log) {
+
+  var zero = { cum: function () { return 0; } }
+
+  var base = zero.project();
+  base.start = base.lunch = base.end = 0;
+  base.tot = function () { return this.end - this.start - this.lunch; }
+  base.cum = function () { return this.proto().cum() + this.tot(); }
+  
+  function newDay(pred, s, l, e) { 
+    var res=pred.project(); 
+    res.start=s; res.lunch=l; res.end=e; 
+    return res;
+  }
+
+  var lines=[];
+  var stint = 20;
+
+  for (var p=base, i=0;i < stint;i++) {
+    lines[i] = newDay(p, randRange(8.5, 10, 0.25), randRange(0, 1.5, 0.25), randRange(16.75, 19, 0.25));
+    p = lines[i];
+  }
+
+  log.push(" Start    Lunch    Leave   Today    Total  ");
+  log.push(" -----    -----    -----   -----    -----  ");
+  for (var i=0;i < stint;i++)
+    log.push(formatDay(lines[i]))
+
+  lines.cum = function() { return this.length ? this[this.length-1].cum() : 0; }
+
+  log.push("                            --------------");
+  log.push("                            Total : "+formatTime(lines.cum()));
+
+}
+    </script>
+
+    <script src='frame.js'> </script>
+  </head>
+  <body onLoad='go();'>
+    <table width='100%'> <tr> <td width='33%' id='prev'> </td> <td width='33%' align='center'><a href='../index.html'>Home</a> </td> <td width='33%' id='next' align='right'> </td> </tr> </table>
+    <h1>2.2: Spreadsheet-type functionality</h1>
+    <p></p>
+    <div id='here'></div>
+    <div id='next' style='display:none;' src='12_undo.html'></div>
+  </body>
+</html>
+

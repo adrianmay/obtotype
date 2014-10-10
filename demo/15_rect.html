@@ -57,16 +57,14 @@ function meat(log) {
     return [l[0]+l[2]+this.standoff, l[1], p[2]-l[2]-3*this.standoff, l[3]]
   }
 
-  var step=10, period=50, hix=500, hiy=100, lo=20;
-  var dir='d';
-  var fs = { 
-    u: function () { page.world[3]-=step; if (page.world[3] <= lo) dir = 'r'; },
-    r: function () { page.world[2]+=step; if (page.world[2] >= hix) dir = 'd'; },
-    d: function () { page.world[3]+=step; if (page.world[3] >= hiy) dir = 'l'; },
-    l: function () { page.world[2]-=step; if (page.world[2] <= lo) dir = 'u'; }
-  };
+  var lox=30, hix=500, loy=30, hiy=150;
+  var mix=(lox+hix)/2, miy=(loy+hiy)/2, rax=(hix-lox)/2, ray=(hiy-loy)/2;
+  var angle=0, dangle=0.05, period=50; 
+  
   function animate() {
-    fs[dir]();
+    angle += dangle;
+    page.world[2]=mix+rax*Math.cos(angle);
+    page.world[3]=miy+ray*Math.sin(angle);
     page.moveDiv();
     leftpane.moveDiv();
     rightpane.moveDiv();

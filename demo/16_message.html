@@ -27,7 +27,7 @@ function meat(log) {
   function makePresident() {
     var res = somebody.project();
     res.name = "Obama";
-    res.softyRating=40;
+    res.softyRating=60;
     res.handle.murder = function (criminal) { 
       if (res.softyRating>50)
         res.speak("Death to "+criminal.name+" for murder");
@@ -65,20 +65,8 @@ function meat(log) {
   obama.judges[1].cops[2].civvies[3].commit('speeding');
   obama.judges[2].cops[1].civvies[0].commit('assault');
   obama.judges[0].cops[3].civvies[1].commit('murder');
-  obama.softyRating = 60;
+  obama.softyRating = 40;
   obama.judges[1].cops[0].civvies[2].commit('murder');
-
-  /*
-  var civvy = obama.judges[1].cops[2].civvies[3];
-  log.push(JSON.stringify(obama, null, 3));
-  log.push(civvy.name);
-  log.push(civvy.proto().name);
-  log.push(civvy.proto().handle.assault.toString());
-  log.push(civvy.proto().proto().name);
-  log.push(civvy.proto().proto().handle.assault.toString());
-  log.push(civvy.proto().proto().proto().name);
-  log.push(civvy.proto().proto().proto().speak.toString());
-  */
 
 }
     </script>

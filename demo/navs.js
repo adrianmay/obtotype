@@ -5,5 +5,6 @@ var navs = {
   '14_box.html': { prev: '13_dir.html', next: '15_rect.html' }, 
   '15_rect.html': { prev: '14_box.html', next: '16_message.html' }, 
   '16_message.html': { prev: '15_rect.html', next: '21_basic.html' }, 
-  '21_basic.html': { prev: '16_message.html', next: '-' }, 
+  '21_basic.html': { prev: '16_message.html', next: '22_cum.html' }, 
+  '22_cum.html': { prev: '21_basic.html', next: '-' }, 
 }
