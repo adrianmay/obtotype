@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<html>
+  <head>
+    <script src='misc.js'></script> 
+    <script src='navs.js'></script> 
+    <script id='core' src='../src/obtotype_simplest.js'> </script>
+    </script>
+    <script id='meat'> 
+
+function meat(log) {
+  
+  function times(m) { return function (f) {
+    var res = [];
+    for (var i=0;i < m;i++)
+      res[i] = f(i);
+    return res;
+  }}
+
+  var somebody = { 
+    name:'anon', 
+    speak: function(statement) { log.push(this.name+": "+statement); } ,
+    handle: {},
+    commit: function(crime) { this.handle[crime](this);}
+  }
+
+  function makePresident() {
+    var res = somebody.project();
+    res.name = "Obama";
+    res.handle.murder = function (criminal) { 
+      res.speak("Death to "+criminal.name+" for murder");
+    }
+    function makeJudge(boss) { return function(i) {
+      var res = boss.project();
+      res.name = "Judge "+i;
+      res.handle.assault = function (criminal) { 
+        res.speak("Jail for "+criminal.name+" for assault");
+      }
+      function makeCop(boss) { return function(j) {
+        var res = boss.project();
+        res.name = boss.name+"'s Cop "+j;
+        res.handle.speeding = function (criminal) { 
+          res.speak("Taser for "+criminal.name+" for speeding");
+        }
+        function makeCivvy(boss) { return function(k) {
+          var res = boss.project();
+          res.name = boss.name+"'s Civvy "+k;
+          return res;
+        }}
+        res.civvies = times(5)(makeCivvy(res));
+        return res;
+      }}
+      res.cops = times(4)(makeCop(res));
+      return res;
+    }}
+    res.judges = times(3)(makeJudge(res));
+    return res;
+  }
+
+  var obama = makePresident();
+  obama.judges[1].cops[2].civvies[3].commit('speeding');
+  obama.judges[2].cops[1].civvies[0].commit('assault');
+  obama.judges[0].cops[3].civvies[1].commit('murder');
+
+  /*
+  var civvy = obama.judges[1].cops[2].civvies[3];
+  log.push(JSON.stringify(obama, null, 3));
+  log.push(civvy.name);
+  log.push(civvy.proto().name);
+  log.push(civvy.proto().handle.assault.toString());
+  log.push(civvy.proto().proto().name);
+  log.push(civvy.proto().proto().handle.assault.toString());
+  log.push(civvy.proto().proto().proto().name);
+  log.push(civvy.proto().proto().proto().speak.toString());
+  */
+
+}
+    </script>
+    <script src='frame.js'> </script>
+  </head>
+  <body onLoad='go();'>
+    <table width='100%'> <tr> <td width='33%' id='prev'> </td> <td width='33%' align='center'><a href='../index.html'>Home</a> </td> <td width='33%' id='next' align='right'> </td> </tr> </table>
+    <h1>1.6: Hierarchial message handling</h1>
+    <div id='here'></div>
+    <div id='next' style='display:none;' src='14_dir.html'></div>
+  </body>
+</html>
+
