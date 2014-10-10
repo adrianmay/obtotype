@@ -24,22 +24,28 @@ function meat(log) {
   }
 
   var lines=[];
-  var stint = 20;
+  lines.cum = function() { return this.length ? this[this.length-1].cum() : 0; }
+
+  var stint = 10;
 
   for (var p=base, i=0;i < stint;i++) {
     lines[i] = newDay(p, randRange(8.5, 10, 0.25), randRange(0, 1.5, 0.25), randRange(16.75, 19, 0.25));
     p = lines[i];
   }
 
-  log.push(" Start    Lunch    Leave   Today    Total  ");
-  log.push(" -----    -----    -----   -----    -----  ");
-  for (var i=0;i < stint;i++)
-    log.push(formatDay(lines[i]))
+  function show () {
+    log.push(" Start    Lunch    Leave   Today    Total  ");
+    log.push(" -----    -----    -----   -----    -----  ");
+    for (var i=0;i < stint;i++)
+      log.push(formatDay(lines[i]))
+    log.push("                            --------------");
+    log.push("                            Total : "+formatTime(lines.cum()));
+    log.push("");
+  }
 
-  lines.cum = function() { return this.length ? this[this.length-1].cum() : 0; }
-
-  log.push("                            --------------");
-  log.push("                            Total : "+formatTime(lines.cum()));
+  show();
+  lines[0].end=12;
+  show();
 
 }
     </script>
