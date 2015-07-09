@@ -3,6 +3,8 @@ obtotype
 
 Experimenting with better use of prototypes
 
+Demos: http://http://adrianmay.github.io/obtotype/
+
 prototype.constructor is silly. If it must exist it should be set in the constructor so that prototypes can correctly have their own constructor. Given that, prototypes can be used as regular objects. But we're not going to construct them any more, rather, we'll clone or project them.
 
 Cloning means making an exact and independent copy. It shares the `__proto__` of the clonee and has own properties which are deep copies of the clonee's own properties. Even basic typed properties must be copied.
